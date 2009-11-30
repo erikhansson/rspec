@@ -38,13 +38,10 @@ module Spec
     # Tweaks raised Exceptions to mask noisy (unneeded) parts of the backtrace
     class QuietBacktraceTweaker < BacktraceTweaker
       unless defined?(IGNORE_PATTERNS)
-        spec_files = Dir["lib/*"].map do |path| 
-          subpath = path[1..-1]
-          /#{subpath}/
-        end
-        IGNORE_PATTERNS = spec_files + [
-          /\/rspec-[^\/]*\/lib\/spec\//,
-          /\/spork-[^\/]*\/lib\/spork\//,
+        IGNORE_PATTERNS = [
+          /\/lib\/spec\//,
+          /\/rspec-[^\/]*\/lib\//,
+          /\/spork-[^\/]*\/lib\//,
           /\/lib\/ruby\//,
           /bin\/spec:/,
           /bin\/spork:/,

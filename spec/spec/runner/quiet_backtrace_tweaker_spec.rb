@@ -118,6 +118,14 @@ module Spec
           @error.backtrace.should be_empty, "Should have removed line with '#{element}'"
         end
       end
+      
+      it "should not filter code in the current project's lib directory" do
+        Dir["lib/*"].each do |element|
+          @error.set_backtrace([element])
+          @tweaker.tweak_backtrace(@error)
+          @error.backtrace.should_not be_empty, "Should not have removed line with '#{element}'"
+        end
+      end
     end
   end
 end
